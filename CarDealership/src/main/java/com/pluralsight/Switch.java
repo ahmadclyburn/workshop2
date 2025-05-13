@@ -4,32 +4,35 @@ import java.util.Scanner;
 
 public class Switch {
     public static Scanner input = new Scanner(System.in);
+
     public static void mainMenu() {
         boolean running = true;
 
         while (running) {
             Menu.showMainMenu();
-            int selectedReportsOptions = input.nextInt();
+            int selectedMenuOptions = input.nextInt();
 
-            switch (selectedReportsOptions) {
+            Dealership dealership = new Dealership("louis' dealership", "123 main street", "9808988898");
+            switch (selectedMenuOptions) {
                 case 1:
-                    ();
+                    CarSearch.searchForCar();
                     break;
                 case 2:
-                    Dealership.<Vehicle> getAllVehicle();
+                    List<Vehicle> vehicles = DealershipFileManager.readInventoryFromFile();
+                    if (vehicles.isEmpty()) {
+                        System.out.println("no cars found");
+                    } else {
+                        System.out.println("All vehicls:");
+                        vehicles.forEach(System.out::println);
+                    }
                     break;
                 case 3:
-                    ();
+                    filterMenu();
                     break;
                 case 4:
-                    ();
-                    break;
-                case 5:
-                    ();
-                    break;
+                    buyOrSellMenu();
                 case 0:
-                    ();
-                    running =false;
+                    running = false;
                     break;
 
                 default:
@@ -37,37 +40,35 @@ public class Switch {
             }
         }
     }
+
     public static void filterMenu() {
         boolean running = true;
 
         while (running) {
-            Menu.showMainMenu();
-            int selectedReportsOptions = input.nextInt();
+            Menu.showFiltersMenu();
+            int selectedFilterOptions = input.nextInt();
 
-            switch (selectedReportsOptions) {
+            switch (selectedFilterOptions) {
                 case 1:
-                    Filter.searchForVin();
-                    break;
-                case 2:
                     Filter.searchForYear();
                     break;
-                case 3:
+                case 2:
                     Filter.searchForMake();
                     break;
-                case 4:
+                case 3:
                     Filter.searchForModel();
                     break;
-                case 5:
+                case 4:
                     Filter.searchForColor();
                     break;
-                case 6:
+                case 5:
                     Filter.searchForOdometer();
                     break;
-                case 7:
+                case 6:
                     Filter.searchForPrice();
                     break;
-                case 8:
-                    running =false;
+                case 7:
+                    running = false;
                     break;
 
                 default:
@@ -76,5 +77,25 @@ public class Switch {
         }
     }
 
+    public static void buyOrSellMenu() {
+        boolean running = true;
 
+        while (running) {
+            Menu.showFiltersMenu();
+            int selectedFilterOptions = input.nextInt();
+
+            switch (selectedFilterOptions) {
+                case 1:
+                    InverntoryManagement.sellVehicle();
+                    break;
+                case 2:
+                    InverntoryManagement.buyVehicle();
+                    break;
+                case 3:
+                    running = false;
+                    break;
+            }
+        }
+
+    }
 }

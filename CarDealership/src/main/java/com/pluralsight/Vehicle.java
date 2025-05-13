@@ -1,7 +1,5 @@
 package com.pluralsight;
 
-import java.time.format.DateTimeFormatter;
-
 public class Vehicle {
     private String vin;
     private String year;
@@ -76,11 +74,11 @@ public class Vehicle {
         this.odometer = odometer;
         this.price = price;
     }
-    public String display() {
+    public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(vin).append("\n").append(year).append("\n").append(make).append(model)
-                .append("\n").append(color).append("\n").append(odometer).append("\n").append(price)
-                .append("__________________________________________________________________________");
+        builder.append(vin).append("|").append(year).append("|").append(make).append("|").append(model)
+                .append("|").append(color).append("|").append(odometer).append("|").append(price)
+                .append("\n");
         return builder.toString();
 
     }

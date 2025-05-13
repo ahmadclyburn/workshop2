@@ -9,10 +9,10 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class DealershipFileManager {
-    public static ArrayList<Vehicle> ReadInventoryFromFile(){
+    public static ArrayList<Vehicle> readInventoryFromFile(){
        ArrayList<Vehicle> inventory = new ArrayList<>();
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -26,9 +26,11 @@ public class DealershipFileManager {
                 String color = tokens[4];
                 int odometer = parseInt(tokens[5]);
                 double price = parseDouble(tokens[6]);
+                Vehicle carInventory = new Vehicle(vin, year, make,model, color,odometer,price);
+                inventory.add(carInventory);
                 }
-
-        } catch (IOException e) {
+            bufreader.close();
+            } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return inventory;

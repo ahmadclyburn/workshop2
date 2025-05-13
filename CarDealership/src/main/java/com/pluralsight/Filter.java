@@ -5,48 +5,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+
 public class Filter {
     public static Scanner input = new Scanner(System.in);
 
-    public static void searchForVin() {
-        System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String vinUserWants = input.nextLine().trim().toLowerCase();
-
-
-        try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
-            bufreader.readLine();
-            String line;
-
-            while ((line = bufreader.readLine()) != null) {
-                String[] tokens = line.split("\\|");
-
-                if (tokens.length >= 7) {
-                    String vin = tokens[0].toLowerCase();
-
-                    if (vin.contains(vinUserWants)) {
-                        System.out.printf("\nyour vin and other car information:\n--------------\n \\033[3m\"vin: %s\\033[3m\" | year: %s " +
-                                        "| make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
-                                tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static void searchForYear() {
         System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String yearUserWants = input.nextLine().trim().toLowerCase();
+        System.out.println("enter the year of car your looking for");
+        String yearUserWants = input.nextLine().trim();
 
 
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -57,7 +29,7 @@ public class Filter {
                     String year = tokens[1].toLowerCase();
 
                     if (year.contains(yearUserWants)) {
-                        System.out.printf("\nall cars from that year :\n--------------\n\\033[3m\"year: %s\\033[3m\" | vin: %s " +
+                        System.out.printf("\nall cars from that year :\n--------------\nyear: %s | vin: %s " +
                                         " |make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
                                 tokens[1], tokens[0], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
                     }
@@ -70,13 +42,12 @@ public class Filter {
 
     public static void searchForMake() {
         System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String makeUserWants = input.nextLine().trim().toLowerCase();
+        System.out.println("enter the car make your looking for");
+        String makeUserWants= input.nextLine().trim().toLowerCase();
 
 
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -87,7 +58,7 @@ public class Filter {
                     String make = tokens[1].toLowerCase();
 
                     if (make.contains(makeUserWants)) {
-                        System.out.printf("\nall makes your looking for:\n--------------\n\\033[3m\"make: %s \\033[3m\"| vin: %s " +
+                        System.out.printf("\nall makes your looking for:\n--------------\nmake: %s | vin: %s " +
                                         " |make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
                                 tokens[2].toUpperCase(), tokens[0], tokens[1], tokens[3], tokens[4], tokens[5], tokens[6]);
                     }
@@ -100,13 +71,12 @@ public class Filter {
 
     public static void searchForModel() {
         System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String makeUserWants = input.nextLine().trim().toLowerCase();
+        System.out.println("enter the car model your looking for");
+        String modelUserWants = input.nextLine().trim().toLowerCase();
 
 
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -114,12 +84,12 @@ public class Filter {
                 String[] tokens = line.split("\\|");
 
                 if (tokens.length >= 7) {
-                    String make = tokens[1].toLowerCase();
+                    String model = tokens[1].toLowerCase();
 
-                    if (make.contains(makeUserWants)) {
-                        System.out.printf("\nall makes your looking for:\n--------------\n\\033[3m\"make: %s \\033[3m\"| vin: %s " +
+                    if (model.contains(modelUserWants)) {
+                        System.out.printf("\nall makes your looking for:\n--------------\nmodel: %s | vin: %s " +
                                         " |make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
-                                tokens[2].toUpperCase(), tokens[0], tokens[1], tokens[3], tokens[4], tokens[5], tokens[6]);
+                                tokens[3].toUpperCase(), tokens[0], tokens[1], tokens[2], tokens[4], tokens[5], tokens[6]);
                     }
                 }
             }
@@ -130,13 +100,12 @@ public class Filter {
 
     public static void searchForColor() {
         System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String makeUserWants = input.nextLine().trim().toLowerCase();
+        System.out.println("enter the color of car your looking for");
+        String colorUserWants = input.nextLine().trim().toLowerCase();
 
 
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -144,12 +113,12 @@ public class Filter {
                 String[] tokens = line.split("\\|");
 
                 if (tokens.length >= 7) {
-                    String make = tokens[1].toLowerCase();
+                    String color = tokens[1].toLowerCase();
 
-                    if (make.contains(makeUserWants)) {
-                        System.out.printf("\nall makes your looking for:\n--------------\n\\033[3m\"make: %s \\033[3m\"| vin: %s " +
+                    if (color.contains(colorUserWants)) {
+                        System.out.printf("\nall makes your looking for:\n--------------\ncolor: %s | vin: %s " +
                                         " |make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
-                                tokens[2].toUpperCase(), tokens[0], tokens[1], tokens[3], tokens[4], tokens[5], tokens[6]);
+                                tokens[4].toUpperCase(), tokens[0], tokens[1], tokens[2], tokens[3], tokens[5], tokens[6]);
                     }
                 }
             }
@@ -159,13 +128,12 @@ public class Filter {
     }
     public static void searchForOdometer() {
         System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String makeUserWants = input.nextLine().trim().toLowerCase();
+        System.out.println("enter the min odometer reading your looking for");
+        int maxOdometerReadingUserWants = input.nextInt();
 
 
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -173,12 +141,12 @@ public class Filter {
                 String[] tokens = line.split("\\|");
 
                 if (tokens.length >= 7) {
-                    String make = tokens[1].toLowerCase();
+                    int odometerReading = parseInt(tokens[5]);
 
-                    if (make.contains(makeUserWants)) {
-                        System.out.printf("\nall makes your looking for:\n--------------\n\\033[3m\"make: %s \\033[3m\"| vin: %s " +
+                    if (odometerReading <= maxOdometerReadingUserWants) {
+                        System.out.printf("\nall makes your looking for:\n--------------\nodometer: %s | vin: %s " +
                                         " |make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
-                                tokens[2].toUpperCase(), tokens[0], tokens[1], tokens[3], tokens[4], tokens[5], tokens[6]);
+                                tokens[5].toUpperCase(), tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[6]);
                     }
                 }
             }
@@ -188,13 +156,12 @@ public class Filter {
     }
     public static void searchForPrice() {
         System.out.println(" ");
-        System.out.println("enter the vin your looking for");
-        input.nextLine();
-        String priceUserWants = input.nextLine().trim().toLowerCase();
+        System.out.println("enter the max price your looking for");
+        double priceUserWants = input.nextFloat();
 
 
         try {
-            BufferedReader bufreader = new BufferedReader(new FileReader("vehicle_inventory.csv"));
+            BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();
             String line;
 
@@ -202,10 +169,10 @@ public class Filter {
                 String[] tokens = line.split("\\|");
 
                 if (tokens.length >= 7) {
-                    String price = tokens[1].toLowerCase();
+                    double price = parseDouble(tokens[6]);
 
-                    if (price.contains(priceUserWants)) {
-                        System.out.printf("\nall makes your looking for:\n--------------\n\\033[3m\"price: %s \\033[3m\"| vin: %s " +
+                    if (price <= priceUserWants) {
+                        System.out.printf("\nall makes your looking for:\n--------------\nprice: %s | vin: %s " +
                                         " |make: %s | model: %s|color: %s|odometer reading: %s| price: %s",
                                 tokens[6].toUpperCase(), tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5]);
                     }
