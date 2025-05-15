@@ -3,7 +3,6 @@ package com.pluralsight;
 public class Menu {
     public static void showMainMenu() {
         System.out.println(" ");
-        System.out.println("Welcome to Louise Pastels Dealership");
         System.out.println("-------------Main Menu------------");
         System.out.println("------Search for specific car-----\n");
         System.out.println("-------view full list of cars-----\n");

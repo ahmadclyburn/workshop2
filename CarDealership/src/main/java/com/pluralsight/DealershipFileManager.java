@@ -1,38 +1,55 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class DealershipFileManager {
-    public static ArrayList<Vehicle> readInventoryFromFile(){
-       ArrayList<Vehicle> inventory = new ArrayList<>();
+    public Dealership readInventoryFromFile() {
+        Dealership dealership = new Dealership("louis' dealership", "123 main street", "9808988898");
+
         try {
             BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
-            bufreader.readLine();
+            String headerLine = bufreader.readLine();
+            String[] header = headerLine.split("\\|");
+            dealership = new Dealership(header[0], header[1], header[2]);
             String line;
+
 
             while ((line = bufreader.readLine()) != null) {
                 String[] tokens = line.split("\\|");
 
-                String vin = tokens[0];
-                String year = tokens[1];
-                String make = tokens[2];
-                String model = tokens[3];
-                String color = tokens[4];
-                int odometer = parseInt(tokens[5]);
-                double price = parseDouble(tokens[6]);
-                Vehicle carInventory = new Vehicle(vin, year, make,model, color,odometer,price);
-                inventory.add(carInventory);
-                }
+                Vehicle v = new Vehicle(
+                        (tokens[0]),
+                        parseInt(tokens[1]),
+                        tokens[2],
+                        tokens[3],
+                        tokens[4],
+                        parseInt(tokens[5]),
+                        parseDouble(tokens[6]));
+                dealership.addVehicle(v);
+            }
             bufreader.close();
-            } catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return inventory;
+        return dealership;
+    }
+
+    public void saveDealership(Dealership dealership) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/vehicle_inventory.csv"))) {
+            writer.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
+            writer.newLine();
+
+            for (Vehicle v : dealership.getAllVehicles()) {
+                writer.write(v.getVin() + "|" + v.getYear() + "|" + v.getMake() + "|" + v.getModel() + "|" + v.getColor() + "|" + v.getOdometer() + "|" + v.getPrice());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+

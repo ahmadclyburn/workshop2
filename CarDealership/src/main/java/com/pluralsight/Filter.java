@@ -17,6 +17,19 @@ public class Filter {
         String yearUserWants = input.nextLine().trim();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         try {
             BufferedReader bufreader = new BufferedReader(new FileReader("src/main/resources/vehicle_inventory.csv"));
             bufreader.readLine();

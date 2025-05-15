@@ -2,7 +2,7 @@ package com.pluralsight;
 
 public class Vehicle {
     private String vin;
-    private String year;
+    private int year;
     private String make;
     private String model;
     private String color;
@@ -17,11 +17,11 @@ public class Vehicle {
         this.vin = vin;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -65,7 +65,7 @@ public class Vehicle {
         this.price = price;
     }
 
-    public Vehicle(String vin, String year, String make, String model, String color, int odometer, double price) {
+    public Vehicle(String vin, int year, String make, String model, String color, int odometer, double price) {
         this.vin = vin;
         this.year = year;
         this.make = make;
